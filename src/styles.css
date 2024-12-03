@@ -1,8 +1,211 @@
+/* Reset */
+
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  /* 2. Remove default margin */
+  * {
+    margin: 0;
+  }
+  
+  body {
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* 5. Improve media defaults */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  
+  /* 6. Inherit fonts for form controls */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  
+  /* 7. Avoid text overflows */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  
+  /* 8. Improve line wrapping */
+  p {
+    text-wrap: pretty;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  /* Own CSS */
+
 html {
     width: 100%;
     height: 100%;
 }
 
 body {
+    background-color: rgb(226, 246, 232);
+    width: 100%;
+    min-height: 100%;
+}
+
+#outerLayout {
+    display: grid;
+    grid-template-columns: 2fr 9fr;
+    grid-template-rows: 1fr;
+}
+
+#sideBar {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    background-color: white;
+    grid-column: 1/2;
+    height: 100vh;
+    width: 100%;
+    row-gap: 2rem;
+}
+
+#nameIcon {
+    grid-row: 1/2;
+}
+
+#dateTasks {
+    grid-row: 2/3;
+}
+
+#Projects {
+    grid-row: 3/4;
+}
+
+#dateTasks, #Projects {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-left: 0.5rem;
+}
+
+
+
+#taskToday, #taskWeek, #taskAll, #defaultProject {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-left: 1.5rem;
+    margin-top: 1.2rem
+}
+
+#mainArea {
+    display: grid;
+    grid-template-columns: 0.15fr 8fr 0.15fr;
+    grid-template-rows: 0.15fr 8fr 0.15fr;
+}
+
+#cardArea {
+    display: grid;
+    background-color: rgb(226, 246, 232);
+    grid-column: 2/3;
+    grid-row: 2/3;
+    border-radius: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 330px));
+    height: 200px;
+    gap: 2.5rem;
+    padding: 2rem;
+}
+
+/* Card Content */
+
+#card {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 0.8fr 0.5fr 0.5fr;
+    grid-template-columns: 1fr 1fr;
+    background-color: white;
+    border-radius: 4rem;
+    box-shadow: 8px 8px 2px 1px rgba(168, 1, 1, 0.459);
+    padding: 2rem;
+    row-gap: 0.1rem;
+    
+}
+#container {
+    margin: 20px;
+    width: 400px;
+    height: 8px;
+  }
+#title {
+    grid-column: 1/3;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+#description {
+    grid-column: 1/3;
+    text-align: center;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    border-radius: 1rem;
+    font-size: 0.9rem;
+}
+
+#until {
+    text-align: center;
+    align-content: center;
+}
+
+#strong {
+    margin-right: 0.8rem;
+}
+#prio {
+    align-content: center;
+    text-align: center;
+}
+
+#prioBackground {
+    display: inline-block;
     background-color: red;
+    color: white;
+    font-weight: 900;
+    font-size: 1rem;
+    padding: 0.3rem;
+    border-radius: 0.9rem;
+}
+
+#notesField {
+
+    grid-row: 4/7;
+    grid-column: 1/3;
+    border: 2px solid rgba(168, 1, 1, 0.668);
+    border-radius: 10px;
+    margin: 0.7rem;
+    padding: 0.7rem;
+    overflow: scroll;
+    width: 250px;
+    height: 80px;
+}
+
+#done {
+    grid-column: 1/3;
+    grid-row: 7/8;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+#doneField {
+    grid-row: 8/9;
+
+}
+#checkBox {
+    justify-self: center;
+    transform: scale(1.5);
+    grid-column: 1/3;
 }
