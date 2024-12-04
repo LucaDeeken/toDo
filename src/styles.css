@@ -224,3 +224,7 @@ display: none;
     border-radius: 10rem;
     cursor: pointer;
 }
+
+#deleteBtn {
+    position: absolute;
+}

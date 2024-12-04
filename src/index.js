@@ -1,7 +1,8 @@
 import "./styles.css";
 import { ToDo, Project } from "./objects.js";
 //import { generateAllCards } from "./populateDom";
-import mySvg from './images/Info.png';
+import info from './images/Info.png';
+import deleteButton from './images/delete.png';
 
 const prioField = document.getElementById("prio");
 const cardDiv = document.getElementById("card");
@@ -11,11 +12,16 @@ const checkBox = document.getElementById("checkBox");
 checkBox.type = "checkbox";
 
 const img = document.createElement('img');
-img.src = mySvg;
+img.src = info;
 img.id = "info";
 prioField.insertAdjacentElement("afterend",img);
 const content = document.querySelector('#card').innerHTML;
 cardDiv.remove();
+
+const delButton = document.createElement('img');
+delButton.src = deleteButton;
+delButton.id = "deleteBtn";
+prioField.insertAdjacentElement("afterend",delButton);
 
 
 
