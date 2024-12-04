@@ -1,7 +1,7 @@
 import "./styles.css";
 import { ToDo, Project } from "./objects.js";
 //import { generateAllCards } from "./populateDom";
-import mySvg from './images/Info.svg';
+import mySvg from './images/Info.png';
 
 const prioField = document.getElementById("prio");
 const cardDiv = document.getElementById("card");
