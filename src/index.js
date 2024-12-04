@@ -25,7 +25,21 @@ const Aufgaben = new Project("Aufgaben");
 Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
 Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
 Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
-
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.24.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
 
 // Aufgaben.editName("Tortellini");
 
