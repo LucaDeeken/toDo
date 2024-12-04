@@ -25,6 +25,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.svg$/,
+        use: 'file-loader', // oder 'url-loader' für kleine SVGs
+      },
+      {
         test: /\.html$/i,
         loader: "html-loader",
       },
