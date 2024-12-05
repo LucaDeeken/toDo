@@ -1,8 +1,7 @@
 import { Aufgaben, Project } from "./objects.js";
 import { cardContent, cardArea, content } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
-import { plusIMG } from "./images/plus.png";
-
+import plusIMG from "./images/plus.png";
 export { generateAllCards, sortByToday, sortByWeek };
 
 //Create IMG Containers(PlusButton)
@@ -50,6 +49,22 @@ function generateCard(i, j) {
     return j;
 }
 
+//generate add container
+
+function addContainer() {
+
+const addDiv = document.createElement("div");
+addDiv.id = "addDiv";
+cardArea.appendChild(addDiv);
+const plusBtn = document.createElement('img');
+plusBtn.src = plusIMG;
+plusBtn.id = "plus";
+addDiv.appendChild(plusBtn);
+
+}
+
+
+
 //generate all Cards based of the Object Arrays
 function generateAllCards() {
     let j=0;
@@ -58,13 +73,7 @@ function generateAllCards() {
         j=generateCard(i, j);
     };
         // add "add"-Container at the last spot
-        const addDiv = document.createElement("div");
-        addDiv.id = "addDiv";
-        cardArea.appendChild(addDiv);
-        const plusBtn = document.createElement('img');
-        plusBtn.src = plusButtom;
-        plusButtom.id = "plus";
-        addDiv.appendChild(plusButton);
+    addContainer();
 }
 
 //generate all Cards dated today
@@ -77,6 +86,7 @@ function sortByToday() {
             j=generateCard(i, j);
         }
     }
+    addContainer();
 }
 //generate all Cards dated for the next seven days, today included
 function sortByWeek() {
@@ -92,5 +102,6 @@ function sortByWeek() {
                 j=generateCard(i, j);
             }
     }
+    addContainer();
 }
 

@@ -255,15 +255,28 @@ display: none;
 
 #addDiv {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1.8fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
-    background-color: rgb(255, 255, 255);
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    background-color: rgba(255, 255, 255, 0.5); /* Transparentes Weiß */
     border-radius: 2rem;
-    box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, .2);
+    box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, 0.2);
     padding: 2rem;
     row-gap: 0.5rem;
     height: 315px;
     width: 315px;
     position: relative;
-    opacity: 0.5;
+}
+
+#plus {
+    align-self: center;
+    justify-self: center;
+    height: 60px;
+    width: 60px;
+    opacity: 0.8;
+    position: absolute;
+    cursor: pointer;
+}
+
+#plus:hover {
+
 }

@@ -14,6 +14,8 @@ const cardArea = document.getElementById("cardArea");
 const taskToday = document.getElementById("taskToday");
 const allTasks = document.getElementById("taskAll");
 const taskWeek = document.getElementById("taskWeek");
+const addToDo = document.getElementById("plus");
+const dialog = document.getElementById("dialog");
 
 //Create IMG Containers(InfoButton)
 const img = document.createElement('img');
@@ -49,19 +51,17 @@ allTasks.addEventListener("click", () => {
     generateAllCards();
 })
 
+//add toDo Card Button
+
+addToDo.addEventListener("click", () => {
+    dialog.showModal();
+})
 
 
 
-
-
-
-//delete ToDo Card
 
 
 // Aufgaben.editName("Tortellini");
 
 
-
-// Aufgaben.sortToDosByDate();
-// console.log(Aufgaben);
 
