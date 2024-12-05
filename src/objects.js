@@ -1,8 +1,8 @@
 import { isAfter, isBefore } from 'date-fns';
-import { format } from "date-fns";
-export { ToDo, Project};
+import { format, isToday, parse } from "date-fns";
+export { ToDo, Project, Aufgaben};
 
-
+//class constructeur for toDo Cards
 class ToDo {
 
     constructor(title, description, dueDate, priority, notes) {
@@ -39,6 +39,7 @@ class ToDo {
     }
 }
 
+//project constructeur, which includes toDo Cards
 class Project {
     
     constructor(name) {
@@ -59,15 +60,23 @@ class Project {
     }
 
     sortToDosByDate() {
-        this.toDos.sort((a, b) => a.dueDate - b.dueDate);
+        this.toDos.sort((a, b) => {
+            const dateA = parse(a.dueDate, 'dd-MM-yyyy', new Date());
+            const dateB = parse(b.dueDate, 'dd-MM-yyyy', new Date());
+            return dateA - dateB;
+        });
     }
 
 }
 
-// Sort by day/week/priority/unchecked
-const sortDOM = {
 
-    sortByDate(Projekt) {
 
-    }
-}
+//Default Project//
+
+const Aufgaben = new Project("Aufgaben");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.08.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "12.05.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Hilfe", "Hier liegen zu viele Krümel", "12.05.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.07.2024", "hoch", "keine AHnung");
