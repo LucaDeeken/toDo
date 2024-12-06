@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    
     <div id="outerLayout">
         <div id="sideBar">
             <div id="nameIcon">Luca</div>
@@ -25,7 +26,7 @@
                     <div id="title" class="contentCards">Clean Windows</div>
                     <div id="description" class="contentCards">Get the dirt off th</div>
                     <div id="until"><strong id="strong">Until:</strong><div class="contentCards" id="date">20.12.24</div></div>
-                    <div id="prio"><strong id="strong">Priority:</strong> <div id="prioBackground" class="contentCards">High</div></div>
+                    <div id="prio"><strong id="strong">Priority:</strong> <div id="prioBackground" class="contentCards prioBackgroundColorGreen">High</div></div>
                     <div id="hiddenNotes" class="contentCards"></div>
                     <div id="done">Done?</div>
                     <label for="checkBox"class="contentCards" id="checkBoxContainer">
@@ -37,27 +38,44 @@
     </div>
     <dialog id="dialog">
         <form method="dialog">
-          <p>
-            <label>
-              Favorite animal:
-              <input type="text" required />
-            </label>
-          </p>
-          <div>
-            <input type="submit" id="normal-close" value="Normal close" />
-            <input
-              type="submit"
-              id="novalidate-close"
-              value="Novalidate close"
-              formnovalidate />
-            <input type="submit" id="js-close" value="JS close" />
-          </div>
+            <fieldset>
+                <legend id="add todo">Add a To-Do</legend>
+                <p id="inputField">
+                    <label for="titleInput">Title:</label>
+                    <input type="text" name="titleInput" id="titleInput">
+                </p>
+                <p id="inputField">
+                    <label for="descriptionInput">Description:</label>
+                    <textarea id="descriptionInput" rows="2" cols="30" placeholder="Hier deinen Text eingeben..."></textarea>
+                </p>
+                <p id="inputField">
+                    <label for="dateInput">Until:</label>
+                    <input type="date" name="dateInput" id="dateInput">
+                </p>
+                <p id="inputFieldRadio">
+                    <legend>Priority:</legend>
+                  
+                    <input type="radio" id="prioInputLow" name="prioInput" value="low" class="checkBoxInput">
+                    <label for="prioInputLow" id="prioLabelLow">Low</label>
+                  
+                    <input type="radio" id="prioInputMedium" name="prioInput" value="medium" class="checkBoxInput">
+                    <label for="prioInputMedium" id="prioLabelMedium">Medium</label>
+                  
+                    <input type="radio" id="prioInputHigh" name="prioInput" value="high" class="checkBoxInput">
+                    <label for="prioInputHigh" id="prioLabelHigh">High</label>
+                  </p>
+                <p id="inputField">
+                    <label for="notesInput">Notes:</label>
+                    <textarea id="descriptionInput" rows="5" cols="30" placeholder="Hier deinen Text eingeben..."></textarea>
+                </p>
+            </fieldset>
+            <div id="buttonFieldInput">
+                <button id="cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default">Confirm</button>
+            </div>
         </form>
-      </dialog>
-      <p>
-        <button id="show-dialog">Show the dialog</button>
-      </p>
-      <output></output>
+
+    </dialog>
     
 </body>
 </html>

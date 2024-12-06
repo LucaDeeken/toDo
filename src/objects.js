@@ -2,6 +2,9 @@ import { isAfter, isBefore } from 'date-fns';
 import { format, isToday, parse } from "date-fns";
 export { ToDo, Project, Aufgaben};
 
+
+
+
 //class constructeur for toDo Cards
 class ToDo {
 
@@ -74,9 +77,13 @@ class Project {
 //Default Project//
 
 const Aufgaben = new Project("Aufgaben");
-Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.08.2024", "hoch", "keine AHnung");
-Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "hoch", "keine AHnung");
-Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "hoch", "keine AHnung");
-Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "12.05.2024", "hoch", "keine AHnung");
-Aufgaben.addToDo("Hilfe", "Hier liegen zu viele Krümel", "12.05.2024", "hoch", "keine AHnung");
-Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.07.2024", "hoch", "keine AHnung");
+Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.08.2024", "high", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "high", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "low", "keine AHnung");
+Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "12.05.2024", "high", "keine AHnung");
+Aufgaben.addToDo("Hilfe", "Hier liegen zu viele Krümel", "12.05.2024", "medium", "keine AHnung");
+Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.07.2024", "high", "keine AHnung");
+
+
+
+

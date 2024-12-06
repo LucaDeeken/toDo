@@ -35,6 +35,22 @@ function generateCard(i, j) {
                 };
                 j++
         }
+    //change backgroundcolor depending on priority
+    const prioBackgroundColor = newDiv.querySelector("#prioBackground");
+    switch(Aufgaben.toDos[i].priority) {
+        case "high":
+            console.log("testi");
+            prioBackgroundColor.classList.remove("prioBackgroundColorGreen");
+            prioBackgroundColor.classList.add("prioBackgroundColorRed");
+            break;
+        case "medium":
+            prioBackgroundColor.classList.remove("prioBackgroundColorGreen");
+            prioBackgroundColor.classList.add("prioBackgroundColorYellow");
+            break;
+        case "low":
+            break;
+    }
+
     //add EventListener for deleteButton
     const deleteButton = newDiv.querySelector("#deleteBtn");
     deleteButton.addEventListener("click", () => {
@@ -60,7 +76,9 @@ const plusBtn = document.createElement('img');
 plusBtn.src = plusIMG;
 plusBtn.id = "plus";
 addDiv.appendChild(plusBtn);
-
+addDiv.addEventListener("click", () => {
+    dialog.showModal();
+})
 }
 
 
