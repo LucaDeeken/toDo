@@ -1,8 +1,8 @@
-import { Aufgaben, Project } from "./objects.js";
+import { Project, projects } from "./objects.js";
 import { cardContent, cardArea, content } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
 import plusIMG from "./images/plus.png";
-export { generateAllCards, sortByToday, sortByWeek };
+export { generateAllCards, sortByToday, sortByWeek, addContainer };
 
 //Create IMG Containers(PlusButton)
 
@@ -13,13 +13,15 @@ export { generateAllCards, sortByToday, sortByWeek };
 
 function generateCard(i, j) {
     
+    const selectedProject = projects.find(project => project.selected === true);
+    console.log(selectedProject);
     const newDiv = document.createElement("div");
     newDiv.id = "card";
     newDiv.classList.add("card");
     newDiv.innerHTML = content;
     cardArea.appendChild(newDiv);
     newDiv.setAttribute("data-index", [i]);
-    const toDoKeys = Aufgaben.toDos[i];
+    const toDoKeys = selectedProject.toDos[i];
     const checkBox = newDiv.querySelector("#checkBox");
     checkBox.setAttribute("data-index", [i]);
     const checkBoxIndex = document.querySelector(`#checkBox[data-index="${i}"]`);
@@ -35,9 +37,15 @@ function generateCard(i, j) {
                 };
                 j++
         }
+        if (!selectedProject.toDos[i]) {
+            console.error(`No ToDo found at index ${i}`);
+            return;
+        }
+
+
     //change backgroundcolor depending on priority
     const prioBackgroundColor = newDiv.querySelector("#prioBackground");
-    switch(Aufgaben.toDos[i].priority) {
+    switch(selectedProject.toDos[i].priority) {
         case "high":
             console.log("testi");
             prioBackgroundColor.classList.remove("prioBackgroundColorGreen");
@@ -54,13 +62,13 @@ function generateCard(i, j) {
     //add EventListener for deleteButton
     const deleteButton = newDiv.querySelector("#deleteBtn");
     deleteButton.addEventListener("click", () => {
-        Aufgaben.deleteToDo(i);
+        selectedProject.deleteToDo(i);
         cardArea.innerHTML = "";
         generateAllCards();
     });
     //add EventListener for checkBox
     checkBoxIndex.addEventListener("click", () => {
-        Aufgaben.toDos[i].setDone();
+        selectedProject.toDos[i].setDone();
     });
     return j;
 }
@@ -86,8 +94,9 @@ addDiv.addEventListener("click", () => {
 //generate all Cards based of the Object Arrays
 function generateAllCards() {
     let j=0;
-    Aufgaben.sortToDosByDate();
-    for(let i=0; i<Aufgaben.toDos.length;i++) {
+    const selectedProject = projects.find(project => project.selected === true);
+    selectedProject.sortToDosByDate();
+    for(let i=0; i<selectedProject.toDos.length;i++) {
         j=generateCard(i, j);
     };
         // add "add"-Container at the last spot
@@ -97,10 +106,11 @@ function generateAllCards() {
 //generate all Cards dated today
 function sortByToday() {
     cardArea.innerHTML = "";
-    let j=0;    
-    for (let i=0; i<Aufgaben.toDos.length;i++) {
+    let j=0;
+    const selectedProject = projects.find(project => project.selected === true);    
+    for (let i=0; i<selectedProject.toDos.length;i++) {
 
-        if ((isToday(parse(Aufgaben.toDos[i].dueDate, 'dd-MM-yyyy', new Date()))) === true) {
+        if ((isToday(parse(selectedProject.toDos[i].dueDate, 'dd-MM-yyyy', new Date()))) === true) {
             j=generateCard(i, j);
         }
     }
@@ -110,12 +120,12 @@ function sortByToday() {
 function sortByWeek() {
     cardArea.innerHTML = "";
     let j=0;
+    const selectedProject = projects.find(project => project.selected === true);
     const today = new Date();
     today.setDate(today.getDate() - 1);
     const sevenDaysLater = addDays(today, 7);
-    console.log(sevenDaysLater);
-        for (let i=0; i<Aufgaben.toDos.length;i++) {
-            const isInNextSevenDays = isWithinInterval((parse(Aufgaben.toDos[i].dueDate, 'dd-MM-yyyy', new Date())), { start: today, end: sevenDaysLater });
+        for (let i=0; i<selectedProject.toDos.length;i++) {
+            const isInNextSevenDays = isWithinInterval((parse(selectedProject.toDos[i].dueDate, 'dd-MM-yyyy', new Date())), { start: today, end: sevenDaysLater });
             if (isInNextSevenDays === true) {
                 j=generateCard(i, j);
             }
@@ -123,3 +133,6 @@ function sortByWeek() {
     addContainer();
 }
 
+//check for chosen project
+
+const selectedProject = projects.find(project => project.selected === true);
