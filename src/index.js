@@ -1,10 +1,10 @@
 import "./styles.css";
-import { ToDo, Project, Aufgaben } from "./objects.js";
-import { generateAllCards, sortByToday, sortByWeek } from "./populateDom";
+import { ToDo, Project, Aufgaben, projects } from "./objects.js";
+import { addContainer, generateAllCards, sortByToday, sortByWeek } from "./populateDom";
 import info from './images/Info.png';
 import deleteButton from './images/delete.png';
 
-export {cardContent, cardArea, content}
+export {cardContent, cardArea, content, Aufgaben}
 
 //GET DOM ELEMENTS
     const prioField = document.getElementById("prio");
@@ -14,13 +14,20 @@ export {cardContent, cardArea, content}
     const taskToday = document.getElementById("taskToday");
     const allTasks = document.getElementById("taskAll");
     const taskWeek = document.getElementById("taskWeek");
-    //get Input-Fields
+    const newProject = document.getElementById("newProject");
+    const createProject = document.getElementById("createProject");
+    const defaultProject = document.getElementById("defaultProject");
+    //get Input-Fields (AddToDo)
     const favDialog = document.getElementById("dialog");
     const confirmBtn = favDialog.querySelector("#confirmBtn");
     const titleInput = favDialog.querySelector("#titleInput");
     const descriptionInput = favDialog.querySelector("#descriptionInput");
     const dateInput = favDialog.querySelector("#dateInput");
     const notesnInput = favDialog.querySelector("#descriptionInput");
+    //get Input-Fields (AddNewProject)
+    const projDialog = document.getElementById("createProject");
+    const confirmBtnProject = projDialog.querySelector("#confirmBtnProject");
+    const projNameInput = projDialog.querySelector("#projectName");
     //create IMG-Containers(InfoButton)
     const img = document.createElement('img');
     img.src = info;
@@ -60,15 +67,63 @@ allTasks.addEventListener("click", () => {
 confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
     const prioInput = favDialog.querySelector('input[name="prioInput"]:checked');
-    console.log(prioInput);
-    Aufgaben.addToDo(titleInput.value, descriptionInput.value, dateInput.value, prioInput.value, notesnInput.value);
+    const selectedProject = projects.find(project => project.selected === true);
+    selectedProject.addToDo(titleInput.value, descriptionInput.value, dateInput.value, prioInput.value, notesnInput.value);
     cardArea.innerHTML = "";
     generateAllCards();
-} )
+})
+
+//add new Projects to Array
+
+newProject.addEventListener("click", () => {
+    createProject.showModal();
+})
+
+confirmBtnProject.addEventListener("click", (event) => {
+const newProjectTitle = new Project(projNameInput.value);
+projects.push(newProjectTitle);
+console.log(projects);
+const newProjectContainer = document.createElement("div");
+newProjectContainer.id="newProject";
+newProjectContainer.textContent = projNameInput.value;
+newProject.parentNode.insertBefore(newProjectContainer, newProject);
+    newProjectContainer.addEventListener("click", () => {
+        const toggleProjectsOff = projects.find(project => project.selected === true);
+        toggleProjectsOff.toggleSelected();
+        newProjectTitle.toggleSelected();
+        cardArea.innerHTML = "";
+        const selectedProject = projects.find(project => project.selected === true);
+        console.log(selectedProject.toDos.length);
+        if(selectedProject.toDos.length!=0) {
+            generateAllCards();
+        } else {
+            addContainer();
+        }
+    })
+})
 
 
+defaultProject.addEventListener("click", () => {
+    const toggleProjectsOff = projects.find(project => project.selected === true);
+    toggleProjectsOff.toggleSelected();
+    Aufgaben.toggleSelected();
+    cardArea.innerHTML = "";
+    const selectedProject = projects.find(project => project.selected === true);
+    console.log(selectedProject.toDos.length);
+    if(selectedProject.toDos.length!=0) {
+        generateAllCards();
+    } else {
+        addContainer();
+    }
+})
 
-// Aufgaben.editName("Tortellini");
+
+//projects.find(project => project.name === newProjectContainer.textContent)
+// selectedProject.editName("Tortellini");
+
+//const selectedProject = projects.find(project => project.name === newProjectContainer.textContent);
+//console.log(clickedProject);
+//clickedProject.addToDo("Max Zeichesdfsdsn Limit", "zerstört sonst das Fenster", "12.06.2025", "medium", "Joa");
 
 
 

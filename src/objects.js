@@ -1,9 +1,10 @@
 import { isAfter, isBefore } from 'date-fns';
 import { format, isToday, parse } from "date-fns";
-export { ToDo, Project, Aufgaben};
+export { ToDo, Project, Aufgaben, projects};
 
 
-
+//Array for project Objects
+const projects = [];
 
 //class constructeur for toDo Cards
 class ToDo {
@@ -30,7 +31,7 @@ class ToDo {
     }
 
     setDate (dueDate) {
-        this.dueDate = new Date(dueDate);
+        this.dueDate = format(new Date(dueDate), "dd-MM-yyyy");
     }
 
     setPriority (priority) {
@@ -40,6 +41,7 @@ class ToDo {
     setDate (notes) {
         this.notes = notes;
     }
+
 }
 
 //project constructeur, which includes toDo Cards
@@ -48,6 +50,7 @@ class Project {
     constructor(name) {
         this.name = name;
         this.toDos = [];
+        this.selected = false;
     }
 
     editName(name) {
@@ -70,20 +73,23 @@ class Project {
         });
     }
 
+    toggleSelected() {
+        if(this.selected===false) {
+            this.selected=true;
+        } else {
+            this.selected=false;
+        }
+    }
 }
 
 
 
 //Default Project//
 
-const Aufgaben = new Project("Aufgaben");
-Aufgaben.addToDo("Bad putzen", "Das Badezimmer muss sauber gemacht werden", "12.08.2024", "high", "keine AHnung");
-Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.30.2024", "high", "keine AHnung");
-Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "01.03.2025", "low", "keine AHnung");
-Aufgaben.addToDo("Flur saugen", "Hier liegen zu viele Krümel", "12.05.2024", "high", "keine AHnung");
-Aufgaben.addToDo("Hilfe", "Hier liegen zu viele Krümel", "12.05.2024", "medium", "keine AHnung");
-Aufgaben.addToDo("Fenster putzen", "Fenster müssen gereinigt werden", "12.07.2024", "high", "keine AHnung");
 
-
-
-
+const Aufgaben = new Project("Private Stuff");
+projects.push(Aufgaben);
+Aufgaben.toggleSelected();
+Aufgaben.addToDo("Drink 8 glasses of water", "for preventing dehydration", "12.08.2024", "high", "Otherwise I'll get headaches");
+Aufgaben.addToDo("Exercise", "2 hours of climbing!", "12.30.2024", "medium", "Need to register me first at the urban apes club");
+Aufgaben.addToDo("Read a chapter of a book", "Moby Dick needs to get finished", "12.22.2024", "low", "I really need to get this done");

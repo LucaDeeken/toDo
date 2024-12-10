@@ -17,9 +17,24 @@
                 <div id="taskAll">All Tasks</div>
             </div>
             <div id="Projects">Projects
-                <div id="defaultProject">Odins ToDo-List</div>
+                <div id="defaultProject">Private Stuff</div>
+                <div id="newProject">New</div>
             </div>
         </div>
+        <dialog id="createProject">
+            <form method="dialog"> <!-- Dies stellt sicher, dass das Formular Dialog-bezogen ist -->
+                <fieldset>
+                    <legend>Add new Project</legend>
+                    <p>
+                        <label for="projectName">Projektname:</label>
+                        <input type="text" name="projectName" id="projectName" required>
+                    </p>
+                </fieldset>
+                <!-- Der "Cancel"-Button verwendet formmethod="dialog", um den Dialog zu schließen -->
+                <button id="cancelBtnProject" type="button" formmethod="dialog">Cancel</button>
+                <button id="confirmBtnProject" type="submit">Confirm</button>
+            </form>
+        </dialog>
         <div id="mainArea">
             <div id="cardArea">
                 <div id="card" class="card">
@@ -42,7 +57,7 @@
                 <legend id="add todo">Add a To-Do</legend>
                 <p id="inputField">
                     <label for="titleInput">Title:</label>
-                    <input type="text" name="titleInput" id="titleInput">
+                    <input type="text" name="titleInput" id="titleInput" maxlength="50">
                 </p>
                 <p id="inputField">
                     <label for="descriptionInput">Description:</label>
