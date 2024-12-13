@@ -1,6 +1,6 @@
 import "./styles.css";
 import { ToDo, Project, Aufgaben, projects } from "./objects.js";
-import { addContainer, generateAllCards, sortByToday, sortByWeek } from "./populateDom";
+import { addContainer, generateAllCards, sortByToday, sortByWeek, addProject } from "./populateDom";
 import info from './images/Info.png';
 import deleteButton from './images/delete.png';
 
@@ -24,22 +24,27 @@ export {cardContent, cardArea, content, Aufgaben}
     const descriptionInput = favDialog.querySelector("#descriptionInput");
     const dateInput = favDialog.querySelector("#dateInput");
     const notesnInput = favDialog.querySelector("#descriptionInput");
+    const cancelButton= favDialog.querySelector("#cancelBtn");
     //get Input-Fields (AddNewProject)
     const projDialog = document.getElementById("createProject");
     const confirmBtnProject = projDialog.querySelector("#confirmBtnProject");
     const projNameInput = projDialog.querySelector("#projectName");
+    const cancelProject = projDialog.querySelector("#cancelBtnProject");
+    //get Input-Fields (editProject)
+    const editDialog = document.getElementById("dialogBox");
+    const cancelEdit = editDialog.querySelector("#closeDialogButton");
     //create IMG-Containers(InfoButton)
-    const img = document.createElement('img');
-    img.src = info;
-    img.id = "info";
-    prioField.insertAdjacentElement("afterend",img);
+    const newImg = document.createElement('img');
+    newImg.src = info;
+    newImg.id = "info";
+    prioField.insertAdjacentElement("afterend",newImg);
     //create IMG Containers(DeleteButton)
     const delButton = document.createElement('img');
     delButton.src = deleteButton;
     delButton.id = "deleteBtn";
     prioField.insertAdjacentElement("afterend",delButton);
 
-    
+ 
 //Grab HTML-Structure of #card and put it into one variable; remove it after that 
 const content = document.querySelector('#card').innerHTML;
 cardDiv.remove();
@@ -73,18 +78,32 @@ confirmBtn.addEventListener("click", (event) => {
     generateAllCards();
 })
 
+//cancelAddToDoWindow
+
+cancelButton.addEventListener("click", () => {
+favDialog.close();
+})
+
+//cancelEditWindow
+cancelEdit.addEventListener("click", () => {
+    console.log("test");
+    editDialog.closest();
+})
+//cancelNewProjectWindow
+cancelProject.addEventListener("click", () => {
+projDialog.close();
+})
 //add new Projects to Array
 
-newProject.addEventListener("click", () => {
+addProject.addEventListener("click", () => {
     createProject.showModal();
 })
 
 confirmBtnProject.addEventListener("click", (event) => {
 const newProjectTitle = new Project(projNameInput.value);
 projects.push(newProjectTitle);
-console.log(projects);
 const newProjectContainer = document.createElement("div");
-newProjectContainer.id="newProject";
+newProjectContainer.id="defaultProject";
 newProjectContainer.textContent = projNameInput.value;
 newProject.parentNode.insertBefore(newProjectContainer, newProject);
     newProjectContainer.addEventListener("click", () => {
@@ -102,7 +121,7 @@ newProject.parentNode.insertBefore(newProjectContainer, newProject);
     })
 })
 
-
+// For Sidebar default Project to pop up
 defaultProject.addEventListener("click", () => {
     const toggleProjectsOff = projects.find(project => project.selected === true);
     toggleProjectsOff.toggleSelected();
@@ -117,13 +136,7 @@ defaultProject.addEventListener("click", () => {
     }
 })
 
-
-//projects.find(project => project.name === newProjectContainer.textContent)
-// selectedProject.editName("Tortellini");
-
-//const selectedProject = projects.find(project => project.name === newProjectContainer.textContent);
-//console.log(clickedProject);
-//clickedProject.addToDo("Max Zeichesdfsdsn Limit", "zerstört sonst das Fenster", "12.06.2025", "medium", "Joa");
+// popup edit dialog
 
 
 

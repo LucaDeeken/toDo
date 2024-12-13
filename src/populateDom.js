@@ -2,7 +2,7 @@ import { Project, projects } from "./objects.js";
 import { cardContent, cardArea, content } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
 import plusIMG from "./images/plus.png";
-export { generateAllCards, sortByToday, sortByWeek, addContainer };
+export { generateAllCards, sortByToday, sortByWeek, addContainer, addProject };
 
 //Create IMG Containers(PlusButton)
 
@@ -70,6 +70,19 @@ function generateCard(i, j) {
     checkBoxIndex.addEventListener("click", () => {
         selectedProject.toDos[i].setDone();
     });
+    //add EventListener for editButton
+    const newImg = newDiv.querySelector("#info");
+    const editDialog = newDiv.querySelector('#dialogBox');
+    newImg.addEventListener("click", () => {
+        const rect = newImg.getBoundingClientRect();
+        editDialog.style.left = `${rect.right}px`; // Position to the right of the button
+        editDialog.style.top = `${rect.top}px`;    // Align vertically with the button
+        editDialog.showModal(); // Open the dialog
+        const cancelEdit = editDialog.querySelector("#closeDialogButton");
+        cancelEdit.addEventListener("click", () => {
+            editDialog.close();
+        })
+    });
     return j;
 }
 
@@ -89,7 +102,13 @@ addDiv.addEventListener("click", () => {
 })
 }
 
+// generate add Projects Icon
 
+const addProject = document.createElement("img");
+addProject.id= "plusProject";
+const newContainer = document.getElementById("newProject");
+newContainer.appendChild(addProject);
+addProject.src= plusIMG;
 
 //generate all Cards based of the Object Arrays
 function generateAllCards() {

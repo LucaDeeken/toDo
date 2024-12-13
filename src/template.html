@@ -10,7 +10,10 @@
     
     <div id="outerLayout">
         <div id="sideBar">
-            <div id="nameIcon">Luca</div>
+            <div id="nameIcon">
+                <img src="./images/guybrush.jpeg" alt="Icon of Guybrush Threepwood, a mighty pirate" id="guybrush">
+                <div id="name">@guybrush</div>
+            </div>
             <div id="dateTasks">Schedule
                 <div id="taskToday">Today</div>
                 <div id="taskWeek">Next Seven Days</div>
@@ -18,20 +21,20 @@
             </div>
             <div id="Projects">Projects
                 <div id="defaultProject">Private Stuff</div>
-                <div id="newProject">New</div>
+                <div id="newProject"></div>
+                <div id="newProjectDiv"></div>
             </div>
         </div>
         <dialog id="createProject">
-            <form method="dialog"> <!-- Dies stellt sicher, dass das Formular Dialog-bezogen ist -->
+            <form method="dialog">
                 <fieldset>
                     <legend>Add new Project</legend>
                     <p>
                         <label for="projectName">Projektname:</label>
-                        <input type="text" name="projectName" id="projectName" required>
+                        <input type="text" name="projectName" id="projectName"maxlength="30">
                     </p>
                 </fieldset>
-                <!-- Der "Cancel"-Button verwendet formmethod="dialog", um den Dialog zu schließen -->
-                <button id="cancelBtnProject" type="button" formmethod="dialog">Cancel</button>
+                <button id="cancelBtnProject" type="reset" value="cancel" formmethod="dialog">Cancel</button>
                 <button id="confirmBtnProject" type="submit">Confirm</button>
             </form>
         </dialog>
@@ -47,6 +50,40 @@
                     <label for="checkBox"class="contentCards" id="checkBoxContainer">
                             <input type="checkbox" id="checkBox">
                     </label>
+                    <dialog id="dialogBox">
+                        <fieldset id="fieldSetEdit">
+                            <legend id="legendEdit">To Do</legend>
+                            <p>
+                                <label for="titleEdit">Title:</label>
+                                <input type="text" name="titleEdit" id="titleEdit" maxlength="14">
+                            </p>
+                            <p>
+                                <label for="descriptionEdit">Description:</label>
+                                <input type="text" name="descriptionEdit" id="descriptionEdit">
+                            </p>
+                            <p>
+                                <label for="dueDateEdit">Description:</label>
+                                <input type="date" name="dueDateEdit" id="dueDateEdit">
+                            </p>
+                            <p>
+                                <legend>Priority:</legend>
+                              
+                                <input type="radio" id="prioEditLow" name="prioEditLow" value="low" class="checkBoxEdit">
+                                <label for="prioEditLow" id="prioEditLow">Low</label>
+                              
+                                <input type="radio" id="prioEditMedium" name="prioInput" value="medium" class="checkBoxEdit">
+                                <label for="prioEditMedium" id="prioEditMedium">Medium</label>
+                              
+                                <input type="radio" id="prioEditHigh" name="prioEditHigh" value="high" class="checkBoxEdit">
+                                <label for="prioEditHigh" id="prioEditHigh">High</label>
+                              </p>
+                              <p>
+                                <label for="dueNotesEdit">Notes:</label>
+                                <input type="text" name="dueNotesEdit" id="dueNotesEdit">
+                            </p>
+                        </fieldset>
+                        <button id="closeDialogButton" type="reset" value="cancel" formmethod="dialogBox">Cancel</button>
+                    </dialog>
                 </div>
             </div>
         </div>
@@ -54,10 +91,10 @@
     <dialog id="dialog">
         <form method="dialog">
             <fieldset>
-                <legend id="add todo">Add a To-Do</legend>
+                <legend id="legendAddToDo">Add a To-Do</legend>
                 <p id="inputField">
                     <label for="titleInput">Title:</label>
-                    <input type="text" name="titleInput" id="titleInput" maxlength="50">
+                    <input type="text" name="titleInput" id="titleInput" maxlength="14">
                 </p>
                 <p id="inputField">
                     <label for="descriptionInput">Description:</label>
@@ -68,7 +105,7 @@
                     <input type="date" name="dateInput" id="dateInput">
                 </p>
                 <p id="inputFieldRadio">
-                    <legend>Priority:</legend>
+                    <legend id="prioLegend">Priority:</legend>
                   
                     <input type="radio" id="prioInputLow" name="prioInput" value="low" class="checkBoxInput">
                     <label for="prioInputLow" id="prioLabelLow">Low</label>
@@ -85,12 +122,13 @@
                 </p>
             </fieldset>
             <div id="buttonFieldInput">
-                <button id="cancelBtn" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="cancelBtn" value="cancel" type="reset" formmethod="dialog">Cancel</button>
                 <button id="confirmBtn" value="default">Confirm</button>
             </div>
         </form>
 
     </dialog>
     
+
 </body>
 </html>
