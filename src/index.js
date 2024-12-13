@@ -31,7 +31,7 @@ export {cardContent, cardArea, content, Aufgaben}
     const projNameInput = projDialog.querySelector("#projectName");
     const cancelProject = projDialog.querySelector("#cancelBtnProject");
     //get Input-Fields (editProject)
-    const editDialog = document.getElementById("dialogBox");
+    const editDialog = document.querySelector("#dialogBox");
     const cancelEdit = editDialog.querySelector("#closeDialogButton");
     //create IMG-Containers(InfoButton)
     const newImg = document.createElement('img');
@@ -86,8 +86,7 @@ favDialog.close();
 
 //cancelEditWindow
 cancelEdit.addEventListener("click", () => {
-    console.log("test");
-    editDialog.closest();
+    editDialog.close();
 })
 //cancelNewProjectWindow
 cancelProject.addEventListener("click", () => {
@@ -104,15 +103,20 @@ const newProjectTitle = new Project(projNameInput.value);
 projects.push(newProjectTitle);
 const newProjectContainer = document.createElement("div");
 newProjectContainer.id="defaultProject";
+newProjectContainer.classList.add("toggleProjClicked");
 newProjectContainer.textContent = projNameInput.value;
 newProject.parentNode.insertBefore(newProjectContainer, newProject);
-    newProjectContainer.addEventListener("click", () => {
+const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
+newProjectContainer.addEventListener("click", (event) => {
+        for(let j=0;j<toggleSidebarProjElements.length;j++) {
+            toggleSidebarProjElements[j].classList.remove("active");
+            event.target.classList.add("active");
+        }
         const toggleProjectsOff = projects.find(project => project.selected === true);
         toggleProjectsOff.toggleSelected();
         newProjectTitle.toggleSelected();
         cardArea.innerHTML = "";
         const selectedProject = projects.find(project => project.selected === true);
-        console.log(selectedProject.toDos.length);
         if(selectedProject.toDos.length!=0) {
             generateAllCards();
         } else {
@@ -120,6 +124,7 @@ newProject.parentNode.insertBefore(newProjectContainer, newProject);
         }
     })
 })
+
 
 // For Sidebar default Project to pop up
 defaultProject.addEventListener("click", () => {
@@ -136,7 +141,29 @@ defaultProject.addEventListener("click", () => {
     }
 })
 
-// popup edit dialog
+// toggle clicked dateElements on sideBar
+const toggleSidebarElements = document.getElementsByClassName("toggleClicked");
+for (let i=0; i<toggleSidebarElements.length;i++) {
+    console.log("test");
+    toggleSidebarElements[i].addEventListener("click", (event) => {
+        for(let j=0;j<toggleSidebarElements.length;j++) {
+            toggleSidebarElements[j].classList.remove("active");
+            event.target.classList.add("active");
+        }
+    });
+}
+
+// toggle clicked projectElements on sideBar
+const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")[0];
+toggleSidebarProjElements.addEventListener("click", (event) => {
+    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")
+        for(let j=0;j<toggleSidebarProjElements.length;j++) {
+            toggleSidebarProjElements[j].classList.remove("active");
+            console.log("tessdfsdt");
+            event.target.classList.add("active");
+        }
+    });
+
 
 
 

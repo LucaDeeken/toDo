@@ -15,14 +15,14 @@
                 <div id="name">@guybrush</div>
             </div>
             <div id="dateTasks">Schedule
-                <div id="taskToday">Today</div>
-                <div id="taskWeek">Next Seven Days</div>
-                <div id="taskAll">All Tasks</div>
+                <div id="taskToday" class="toggleClicked">Today</div>
+                <div id="taskWeek" class="toggleClicked">Next Seven Days</div>
+                <div id="taskAll" class="toggleClicked">All Tasks</div>
             </div>
             <div id="Projects">Projects
-                <div id="defaultProject">Private Stuff</div>
-                <div id="newProject"></div>
-                <div id="newProjectDiv"></div>
+                <div id="defaultProject" class="active toggleProjClicked">Private Stuff</div>
+                <div id="newProject" class="toggleProjClicked"></div>
+                <div id="newProjectDiv" class="toggleProjClicked"></div>
             </div>
         </div>
         <dialog id="createProject">
@@ -51,6 +51,7 @@
                             <input type="checkbox" id="checkBox">
                     </label>
                     <dialog id="dialogBox">
+                        <form method="dialog">
                         <fieldset id="fieldSetEdit">
                             <legend id="legendEdit">To Do</legend>
                             <p>
@@ -83,6 +84,7 @@
                             </p>
                         </fieldset>
                         <button id="closeDialogButton" type="reset" value="cancel" formmethod="dialogBox">Cancel</button>
+                    </form>
                     </dialog>
                 </div>
             </div>
