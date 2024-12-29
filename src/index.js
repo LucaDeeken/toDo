@@ -73,9 +73,23 @@ confirmBtn.addEventListener("click", (event) => {
     event.preventDefault();
     const prioInput = favDialog.querySelector('input[name="prioInput"]:checked');
     const selectedProject = projects.find(project => project.selected === true);
+    if(!titleInput.value) {
+        alert("Enter the title of the To-Do!");
+        return;
+    };
+    if(!prioInput) {
+        alert("Enter a priority value for the To-Do!");
+        return;
+    };
+    if(!dateInput.value) {
+        alert("Enter a due date!");
+        return;
+    };
     selectedProject.addToDo(titleInput.value, descriptionInput.value, dateInput.value, prioInput.value, notesnInput.value);
     cardArea.innerHTML = "";
+    favDialog.querySelector("form").reset();
     generateAllCards();
+    favDialog.close();
 })
 
 //cancelAddToDoWindow
@@ -99,6 +113,10 @@ addProject.addEventListener("click", () => {
 })
 
 confirmBtnProject.addEventListener("click", (event) => {
+if(!projNameInput.value) {
+    alert("Enter the title of the project!");
+    return;
+}
 const newProjectTitle = new Project(projNameInput.value);
 projects.push(newProjectTitle);
 const newProjectContainer = document.createElement("div");
@@ -133,7 +151,6 @@ defaultProject.addEventListener("click", () => {
     Aufgaben.toggleSelected();
     cardArea.innerHTML = "";
     const selectedProject = projects.find(project => project.selected === true);
-    console.log(selectedProject.toDos.length);
     if(selectedProject.toDos.length!=0) {
         generateAllCards();
     } else {
@@ -144,7 +161,6 @@ defaultProject.addEventListener("click", () => {
 // toggle clicked dateElements on sideBar
 const toggleSidebarElements = document.getElementsByClassName("toggleClicked");
 for (let i=0; i<toggleSidebarElements.length;i++) {
-    console.log("test");
     toggleSidebarElements[i].addEventListener("click", (event) => {
         for(let j=0;j<toggleSidebarElements.length;j++) {
             toggleSidebarElements[j].classList.remove("active");
@@ -159,7 +175,6 @@ toggleSidebarProjElements.addEventListener("click", (event) => {
     const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")
         for(let j=0;j<toggleSidebarProjElements.length;j++) {
             toggleSidebarProjElements[j].classList.remove("active");
-            console.log("tessdfsdt");
             event.target.classList.add("active");
         }
     });

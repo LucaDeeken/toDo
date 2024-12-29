@@ -27,15 +27,17 @@
         </div>
         <dialog id="createProject">
             <form method="dialog">
-                <fieldset>
+                <fieldset id="projectFieldset">
                     <legend>Add new Project</legend>
                     <p>
-                        <label for="projectName">Projektname:</label>
+                        <label for="projectName">Title:</label>
                         <input type="text" name="projectName" id="projectName"maxlength="30">
                     </p>
                 </fieldset>
+                <div id="buttonFieldInput">
                 <button id="cancelBtnProject" type="reset" value="cancel" formmethod="dialog">Cancel</button>
                 <button id="confirmBtnProject" type="submit">Confirm</button>
+            </div>
             </form>
         </dialog>
         <div id="mainArea">
@@ -54,36 +56,40 @@
                         <form method="dialog">
                         <fieldset id="fieldSetEdit">
                             <legend id="legendEdit">To Do</legend>
-                            <p>
-                                <label for="titleEdit">Title:</label>
-                                <input type="text" name="titleEdit" id="titleEdit" maxlength="14">
-                            </p>
-                            <p>
-                                <label for="descriptionEdit">Description:</label>
-                                <input type="text" name="descriptionEdit" id="descriptionEdit">
-                            </p>
-                            <p>
-                                <label for="dueDateEdit">Description:</label>
-                                <input type="date" name="dueDateEdit" id="dueDateEdit">
-                            </p>
-                            <p>
-                                <legend>Priority:</legend>
+                             <div id="editContentBox">
+                                <label for="titleEdit" id="titleEditLabel">Title:</label>
+                                <input type="text" name="titleEdit" id="titleEdit" maxlength="14" required class="editInputFields" readonly>
+                            
+                            
+                                <label for="descriptionEdit" id="descEditLabel">Description:</label>
+                                <textarea id="descriptionEdit" rows="2" cols="30" class="editInputFields" readonly></textarea>
+                            
+                            
+                                <label for="dueDateEdit" id="dateEditLabel">Until:</label>
+                                <input type="date" name="dueDateEdit" class="editInputFields" id="dueDateEdit" readonly>
+                            
+                            
+                                <legend id="prioEditLabel" class="editInputFields">Priority:</legend>
+                                <div id="prioEdit">
+                                    <label for="prioEditLow" >Low</label>
+                                    <input type="radio" id="prioEditLow" name="prioEditLow" value="low" class="checkBoxEdit" disabled>
+                                
+                                    <label for="prioEditMedium" >Medium</label>
+                                    <input type="radio" id="prioEditMedium" name="prioInput" value="medium" class="checkBoxEdit" disabled>
+                                
+                                    <label for="prioEditHigh">High</label>
+                                    <input type="radio" id="prioEditHigh" name="prioEditHigh" value="high" class="checkBoxEdit" disabled>
+                                </div>
                               
-                                <input type="radio" id="prioEditLow" name="prioEditLow" value="low" class="checkBoxEdit">
-                                <label for="prioEditLow" id="prioEditLow">Low</label>
-                              
-                                <input type="radio" id="prioEditMedium" name="prioInput" value="medium" class="checkBoxEdit">
-                                <label for="prioEditMedium" id="prioEditMedium">Medium</label>
-                              
-                                <input type="radio" id="prioEditHigh" name="prioEditHigh" value="high" class="checkBoxEdit">
-                                <label for="prioEditHigh" id="prioEditHigh">High</label>
-                              </p>
-                              <p>
-                                <label for="dueNotesEdit">Notes:</label>
-                                <input type="text" name="dueNotesEdit" id="dueNotesEdit">
-                            </p>
+                                <label for="dueNotesEdit"id="notesEditLabel">Notes:</label>
+                                <textarea id="dueNotesEdit" rows="2" cols="30" class="editInputFields" readonly></textarea>
+                                <div class="editInputFields placeholderContainerWithoutUse"></div>
+                            </div>
                         </fieldset>
-                        <button id="closeDialogButton" type="reset" value="cancel" formmethod="dialogBox">Cancel</button>
+                        <div id="buttonFieldInput">
+                            <button id="closeDialogButton" type="reset" value="cancel" formmethod="dialogBox">Cancel</button>
+                            <button id="editDialogButton" >Edit</button>
+                        </div>
                     </form>
                     </dialog>
                 </div>
@@ -96,15 +102,15 @@
                 <legend id="legendAddToDo">Add a To-Do</legend>
                 <p id="inputField">
                     <label for="titleInput">Title:</label>
-                    <input type="text" name="titleInput" id="titleInput" maxlength="14">
+                    <input type="text" name="titleInput" id="titleInput" maxlength="14" required>
                 </p>
                 <p id="inputField">
                     <label for="descriptionInput">Description:</label>
-                    <textarea id="descriptionInput" rows="2" cols="30" placeholder="Hier deinen Text eingeben..."></textarea>
+                    <textarea id="descriptionInput" rows="2" cols="30" placeholder="Insert your text here..."></textarea>
                 </p>
                 <p id="inputField">
                     <label for="dateInput">Until:</label>
-                    <input type="date" name="dateInput" id="dateInput">
+                    <input type="date" name="dateInput" id="dateInput" required>
                 </p>
                 <p id="inputFieldRadio">
                     <legend id="prioLegend">Priority:</legend>
@@ -120,12 +126,12 @@
                   </p>
                 <p id="inputField">
                     <label for="notesInput">Notes:</label>
-                    <textarea id="descriptionInput" rows="5" cols="30" placeholder="Hier deinen Text eingeben..."></textarea>
+                    <textarea id="descriptionInput" rows="5" cols="30" placeholder="Insert your text here..."></textarea>
                 </p>
             </fieldset>
             <div id="buttonFieldInput">
                 <button id="cancelBtn" value="cancel" type="reset" formmethod="dialog">Cancel</button>
-                <button id="confirmBtn" value="default">Confirm</button>
+                <button id="confirmBtn" value="default" >Confirm</button>
             </div>
         </form>
 
