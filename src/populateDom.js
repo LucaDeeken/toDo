@@ -1,4 +1,4 @@
-import { Project, projects } from "./objects.js";
+import { Project, projects, ToDo } from "./objects.js";
 import { cardContent, cardArea, content } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
 import plusIMG from "./images/plus.png";
@@ -7,7 +7,7 @@ export { generateAllCards, sortByToday, sortByWeek, addContainer, addProject };
 //Create IMG Containers(PlusButton)
 
 
-//function-library
+//FUNCTION-LIBRARY
 
 //generating Cards
 
@@ -109,11 +109,46 @@ function generateCard(i, j, h) {
                         break;
                 }
             } else {
- ;
                 inputEditFields[h].value= `${toDoKeys[key]}`;
             }
             h++;
-        }    
+        }
+    const editButton = editDialog.querySelector("#editDialogButton");
+    editButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        for (let k =0; k<inputEditFields.length; k++) {
+            inputEditFields[k].removeAttribute("readonly");
+        };
+        const checkBoxEdit = editDialog.querySelectorAll(".checkBoxEdit");
+        for (let l=0; l<checkBoxEdit.length; l++) {
+            checkBoxEdit[l].removeAttribute("disabled");
+        };
+        editButton.textContent = "Apply";
+        editButton.addEventListener("click", () => {
+            const newEditTitle = editDialog.querySelector("#titleEdit");
+            selectedProject.toDos[i].setTitle(newEditTitle.value);
+
+            const newEditDescription = editDialog.querySelector("#descriptionEdit");
+            selectedProject.toDos[i].setDescription(newEditDescription.value);
+
+            const newEditNotes = editDialog.querySelector("#dueNotesEdit");
+            selectedProject.toDos[i].setNotes(newEditNotes.value);
+
+            const newEditDate = editDialog.querySelector("#dueDateEdit");
+            selectedProject.toDos[i].setDate(newEditDate.value);
+
+            const newEditPrio = editDialog.querySelector('input[name="prioEdit"]:checked');
+            selectedProject.toDos[i].setPriority(newEditPrio.value);
+
+            cardArea.innerHTML = "";  
+            generateAllCards();
+            editDialog.close();
+        });
+
+              
+
+
+    })        
     });
 
     return j;
@@ -187,5 +222,4 @@ function sortByWeek() {
 }
 
 //check for chosen project
-
 const selectedProject = projects.find(project => project.selected === true);

@@ -20,7 +20,7 @@
                 <div id="taskAll" class="toggleClicked">All Tasks</div>
             </div>
             <div id="Projects">Projects
-                <div id="defaultProject" class="active toggleProjClicked">Private Stuff</div>
+                <div id="defaultProject" class="active toggleProjClicked">Survival</div>
                 <div id="newProject" class="toggleProjClicked"></div>
                 <div id="newProjectDiv" class="toggleProjClicked"></div>
             </div>
@@ -28,9 +28,9 @@
         <dialog id="createProject">
             <form method="dialog">
                 <fieldset id="projectFieldset">
-                    <legend>Add new Project</legend>
+                    <legend id="addProjectLegend">Add a new Project</legend>
                     <p>
-                        <label for="projectName">Title:</label>
+                        <label for="projectName" id="newProjTitle">Title:</label>
                         <input type="text" name="projectName" id="projectName"maxlength="30">
                     </p>
                 </fieldset>
@@ -72,13 +72,13 @@
                                 <legend id="prioEditLabel" class="editInputFields">Priority:</legend>
                                 <div id="prioEdit">
                                     <label for="prioEditLow" >Low</label>
-                                    <input type="radio" id="prioEditLow" name="prioEditLow" value="low" class="checkBoxEdit" disabled>
+                                    <input type="radio" id="prioEditLow" name="prioEdit" value="low" class="checkBoxEdit" disabled>
                                 
                                     <label for="prioEditMedium" >Medium</label>
-                                    <input type="radio" id="prioEditMedium" name="prioInput" value="medium" class="checkBoxEdit" disabled>
+                                    <input type="radio" id="prioEditMedium" name="prioEdit" value="medium" class="checkBoxEdit" disabled>
                                 
                                     <label for="prioEditHigh">High</label>
-                                    <input type="radio" id="prioEditHigh" name="prioEditHigh" value="high" class="checkBoxEdit" disabled>
+                                    <input type="radio" id="prioEditHigh" name="prioEdit" value="high" class="checkBoxEdit" disabled>
                                 </div>
                               
                                 <label for="dueNotesEdit"id="notesEditLabel">Notes:</label>

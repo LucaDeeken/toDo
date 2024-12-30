@@ -74,13 +74,14 @@ h6 {
 
 html {
     width: 100%;
-    height: 100%;
+    height: 100vh;
 }
 
 body {
     background-color: rgb(226, 246, 232);
     width: 100%;
-    min-height: 100%;
+    height: 100vh;
+    min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     position: relative;
 }
@@ -89,15 +90,16 @@ body {
     display: grid;
     grid-template-columns: 2fr 9fr;
     grid-template-rows: 1fr;
+    height: 100vh;
 }
 
 #sideBar {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 5fr;
+    grid-template-rows: 1fr 1fr 1fr 6fr;
     background-color: white;
     grid-column: 1/2;
-    height: 100vh;
-    row-gap: 3rem;
+    min-height: 100vh;
+    row-gap: 4rem;
     min-width: 230px;
     max-width: 350px;
 }
@@ -142,7 +144,7 @@ body {
 }
 
 #plusProject {
-    height: 30px;
+    height: 28px;
     font-size: 1.2rem;
     font-weight: 500;
     margin-left: 1.3rem;
@@ -221,6 +223,7 @@ body {
     border-radius: 2rem;
     box-shadow: 8px 8px 2px 1px rgba(0, 0, 255, .2);
     padding: 2rem;
+    padding-top: 2rem;
     row-gap: 0.5rem;
     height: 315px;
     width: 315px;
@@ -264,12 +267,15 @@ body {
     text-align: center;
     align-content: center;
     margin-top: 1rem;
+    
 }
 
 #prio {
     align-content: center;
     text-align: center;
     margin-top: 1.2rem;
+    max-width: 125px;
+
 }
 
 #prioBackground {
@@ -280,8 +286,8 @@ body {
     padding: 0.15rem;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
-    margin-left: 2.6rem;
-    margin-right: 2.6rem;
+    margin-left: 1.6rem;
+    margin-right: 1.6rem;
     border-radius: 3rem;
 }
 
@@ -393,7 +399,7 @@ body {
 }
 
 fieldset {
-    width: 26.5rem;
+    width: 27.22rem;
     height: 25rem;
     align-self: center;
     justify-self: center;
@@ -431,6 +437,7 @@ textarea {
 label,
 #prioLegend {
     justify-self: start;
+    font-weight: 900;
 }
 
 #prioLegend {
@@ -457,28 +464,26 @@ legend {
     grid-column: 2/3;
     grid-row: 1/2;
     justify-self: end;
-    margin-right: 0.42rem;
 }
 
 #prioInputLow {
     grid-column: 3/4;
     grid-row: 1/2;
-    height: 1.5rem;
-    margin-right: 0.42rem;
+    height: 1.3rem;
+    margin-top: 0.1rem;
 }
 
 #prioLabelMedium {
     grid-column: 4/5;
     grid-row: 1/2;
     justify-self: end;
-    margin-right: 0.42rem;
 }
 
 #prioInputMedium {
     grid-column: 5/6;
     grid-row: 1/2;
-    height: 1.5rem;
-    margin-right: 0.42rem;
+    height: 1.3rem;
+    margin-top: 0.1rem;
 
 }
 
@@ -486,14 +491,13 @@ legend {
     grid-column: 6/7;
     grid-row: 1/2;
     justify-self: end;
-    margin-right: 0.42rem;
 }
 
 #prioInputHigh {
     grid-column: 7/8;
     grid-row: 1/2;
-    height: 1.5rem;
-    margin-right: 0.42rem;
+    height: 1.3rem;
+    margin-top: 0.1rem;
 }
 
 label {
@@ -511,7 +515,7 @@ input {
 
 #descriptionInput {
     height: 4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.97rem;
 }
 
 #dateInput {
@@ -573,7 +577,8 @@ input {
     height: 520px;
     width: 490px;
     margin-top: 1rem;
-    justify-self: center;
+    margin-left: 0.9rem;
+    border: 3px solid silver;
 }
 
 #legendEdit {
@@ -581,6 +586,7 @@ input {
     font-weight: 700;
     font-size: 1.3rem;
 }
+
 
 #editContentBox {
     display: grid;
@@ -602,7 +608,7 @@ input {
 }
 #descriptionEdit {
     grid-row: 2/3;
-    height: 4rem;
+    height: 5rem;
     
 }
 
@@ -617,12 +623,20 @@ input {
 #prioEditLabel {
     grid-row: 4/5;
     justify-self: start;
+    font-weight: 900;
 }
+
 #prioEdit {
     grid-row: 4/5;
     font-size: 1.05rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    padding: 4px;
+    padding-top: 2px;
+    height: 2.1rem;
+    border-radius: 10px;
+    border: 2px solid rgb(146, 145, 145);
+    
 }
 
 .checkBoxEdit {
@@ -636,13 +650,20 @@ input {
 }
 #dueNotesEdit {
     grid-row: 5/6;
-    height: 10rem;
+    height: 9.5rem;
 }
 
 input[readonly], textarea[readonly] {
     background-color: #fafafa;
     text-align: center;
+    align-content: center;
+    border-radius: 10px;
+    border: 2px solid rgb(146, 145, 145);
     
+}
+
+label {
+    font-weight: 900;
 }
 
 
@@ -666,6 +687,16 @@ input[readonly], textarea[readonly] {
 
     height: 8.4rem;
     width: 24.3rem;
+}
+
+#addProjectLegend {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+#newProjTitle {
+    margin-right: 1.3rem;
 }
 
 #cancelBtnProject {

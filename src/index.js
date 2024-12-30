@@ -172,13 +172,19 @@ for (let i=0; i<toggleSidebarElements.length;i++) {
 // toggle clicked projectElements on sideBar
 const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")[0];
 toggleSidebarProjElements.addEventListener("click", (event) => {
-    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")
+    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
         for(let j=0;j<toggleSidebarProjElements.length;j++) {
             toggleSidebarProjElements[j].classList.remove("active");
             event.target.classList.add("active");
         }
     });
 
+// edit toDo on editDialog
 
+const editButton = editDialog.querySelector("#editDialogButton");
+
+editButton.addEventListener("click", () => {
+    console.log("hi bro");
+})
 
 
