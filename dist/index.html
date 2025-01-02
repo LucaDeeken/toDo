@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toDo Application</title>
+    <link rel="stylesheet" href="84bb4fc080631c2605f1.css">
+<script defer src="main.js"></script></head>
+<body>
+    
+    <div id="outerLayout">
+        <div id="sideBar">
+            <div id="nameIcon">
+                <img src="8c8c38796f184cb7a7b3.jpeg" alt="Icon of Guybrush Threepwood, a mighty pirate" id="guybrush">
+                <div id="name">@guybrush</div>
+            </div>
+            <div id="dateTasks">Schedule
+                <div id="taskToday" class="toggleClicked">Today</div>
+                <div id="taskWeek" class="toggleClicked">Next Seven Days</div>
+                <div id="taskAll" class="toggleClicked">All Tasks</div>
+            </div>
+            <div id="Projects">Projects
+                <div id="newProject" class="toggleProjClicked"></div>
+                <div id="newProjectDiv" class="toggleProjClicked"></div>
+            </div>
+        </div>
+        <dialog id="createProject">
+            <form method="dialog">
+                <fieldset id="projectFieldset">
+                    <legend id="addProjectLegend">Add a new Project</legend>
+                    <p>
+                        <label for="projectName" id="newProjTitle">Title:</label>
+                        <input type="text" name="projectName" id="projectName"maxlength="30">
+                    </p>
+                </fieldset>
+                <div id="buttonFieldInput">
+                <button id="cancelBtnProject" type="reset" value="cancel" formmethod="dialog">Cancel</button>
+                <button id="confirmBtnProject" type="submit">Confirm</button>
+            </div>
+            </form>
+        </dialog>
+        <div id="mainArea">
+            <div id="cardArea">
+                <div id="card" class="card">
+                    <div id="title" class="contentCards">Clean Windows</div>
+                    <div id="description" class="contentCards">Get the dirt off th</div>
+                    <div id="until"><strong id="strong">Until:</strong><div class="contentCards" id="date">20.12.24</div></div>
+                    <div id="prio"><strong id="strong">Priority:</strong> <div id="prioBackground" class="contentCards prioBackgroundColorGreen">High</div></div>
+                    <div id="hiddenNotes" class="contentCards"></div>
+                    <div id="done">Done?</div>
+                    <label for="checkBox"class="contentCards" id="checkBoxContainer">
+                            <input type="checkbox" id="checkBox">
+                    </label>
+                    <dialog id="dialogBox">
+                        <form method="dialog">
+                        <fieldset id="fieldSetEdit">
+                            <legend id="legendEdit">To Do</legend>
+                             <div id="editContentBox">
+                                <label for="titleEdit" id="titleEditLabel">Title:</label>
+                                <input type="text" name="titleEdit" id="titleEdit" maxlength="14" required class="editInputFields" readonly>
+                            
+                            
+                                <label for="descriptionEdit" id="descEditLabel">Description:</label>
+                                <textarea id="descriptionEdit" rows="2" cols="30" class="editInputFields" readonly></textarea>
+                            
+                            
+                                <label for="dueDateEdit" id="dateEditLabel">Until:</label>
+                                <input type="date" name="dueDateEdit" class="editInputFields" id="dueDateEdit" readonly>
+                            
+                            
+                                <legend id="prioEditLabel" class="editInputFields">Priority:</legend>
+                                <div id="prioEdit">
+                                    <label for="prioEditLow" >Low</label>
+                                    <input type="radio" id="prioEditLow" name="prioEdit" value="low" class="checkBoxEdit" disabled>
+                                
+                                    <label for="prioEditMedium" >Medium</label>
+                                    <input type="radio" id="prioEditMedium" name="prioEdit" value="medium" class="checkBoxEdit" disabled>
+                                
+                                    <label for="prioEditHigh">High</label>
+                                    <input type="radio" id="prioEditHigh" name="prioEdit" value="high" class="checkBoxEdit" disabled>
+                                </div>
+                              
+                                <label for="dueNotesEdit"id="notesEditLabel">Notes:</label>
+                                <textarea id="dueNotesEdit" rows="2" cols="30" class="editInputFields" readonly></textarea>
+                                <div class="editInputFields placeholderContainerWithoutUse"></div>
+                            </div>
+                        </fieldset>
+                        <div id="buttonFieldInput">
+                            <button id="closeDialogButton" type="reset" value="cancel" formmethod="dialogBox">Cancel</button>
+                            <button id="editDialogButton" >Edit</button>
+                        </div>
+                    </form>
+                    </dialog>
+                </div>
+            </div>
+            <div id="deleteProject">
+                <div id="deleteProjBut">X</div>
+            </div>
+        </div>
+    </div>
+    <dialog id="dialog">
+        <form method="dialog">
+            <fieldset>
+                <legend id="legendAddToDo">Add a To-Do</legend>
+                <p id="inputField">
+                    <label for="titleInput">Title:</label>
+                    <input type="text" name="titleInput" id="titleInput" maxlength="14" required>
+                </p>
+                <p id="inputField">
+                    <label for="descriptionInput">Description:</label>
+                    <textarea id="descriptionInput" rows="2" cols="30" placeholder="Insert your text here..."></textarea>
+                </p>
+                <p id="inputField">
+                    <label for="dateInput">Until:</label>
+                    <input type="date" name="dateInput" id="dateInput" required>
+                </p>
+                <p id="inputFieldRadio">
+                    <legend id="prioLegend">Priority:</legend>
+                  
+                    <input type="radio" id="prioInputLow" name="prioInput" value="low" class="checkBoxInput">
+                    <label for="prioInputLow" id="prioLabelLow">Low</label>
+                  
+                    <input type="radio" id="prioInputMedium" name="prioInput" value="medium" class="checkBoxInput">
+                    <label for="prioInputMedium" id="prioLabelMedium">Medium</label>
+                  
+                    <input type="radio" id="prioInputHigh" name="prioInput" value="high" class="checkBoxInput">
+                    <label for="prioInputHigh" id="prioLabelHigh">High</label>
+                  </p>
+                <p id="inputField">
+                    <label for="notesInput">Notes:</label>
+                    <textarea id="descriptionInput" rows="5" cols="30" placeholder="Insert your text here..."></textarea>
+                </p>
+            </fieldset>
+            <div id="buttonFieldInput">
+                <button id="cancelBtn" value="cancel" type="reset" formmethod="dialog">Cancel</button>
+                <button id="confirmBtn" value="default" >Confirm</button>
+            </div>
+        </form>
+
+    </dialog>
+    
+
+</body>
+</html>
