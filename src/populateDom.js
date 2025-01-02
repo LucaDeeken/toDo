@@ -1,5 +1,5 @@
 import { Project, projects, ToDo } from "./objects.js";
-import { cardContent, cardArea, content } from "./index.js";
+import { cardContent, cardArea, content, saveProjectsToStorage } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
 import plusIMG from "./images/plus.png";
 export { generateAllCards, sortByToday, sortByWeek, addContainer, addProject };
@@ -14,7 +14,6 @@ export { generateAllCards, sortByToday, sortByWeek, addContainer, addProject };
 function generateCard(i, j, h) {
     
     const selectedProject = projects.find(project => project.selected === true);
-    console.log(selectedProject);
     const newDiv = document.createElement("div");
     newDiv.id = "card";
     newDiv.classList.add("card");
@@ -47,7 +46,6 @@ function generateCard(i, j, h) {
     const prioBackgroundColor = newDiv.querySelector("#prioBackground");
     switch(selectedProject.toDos[i].priority) {
         case "high":
-            console.log("testi");
             prioBackgroundColor.classList.remove("prioBackgroundColorGreen");
             prioBackgroundColor.classList.add("prioBackgroundColorRed");
             break;
@@ -64,11 +62,13 @@ function generateCard(i, j, h) {
     deleteButton.addEventListener("click", () => {
         selectedProject.deleteToDo(i);
         cardArea.innerHTML = "";
+        saveProjectsToStorage();
         generateAllCards();
     });
     //add EventListener for checkBox
     checkBoxIndex.addEventListener("click", () => {
         selectedProject.toDos[i].setDone();
+        saveProjectsToStorage();
     });
     //add EventListener for editButton
     const newImg = newDiv.querySelector("#info");
@@ -142,6 +142,7 @@ function generateCard(i, j, h) {
 
             cardArea.innerHTML = "";  
             generateAllCards();
+            saveProjectsToStorage();
             editDialog.close();
         });
 
@@ -155,7 +156,6 @@ function generateCard(i, j, h) {
 }
 
 //generate add container
-
 function addContainer() {
 
 const addDiv = document.createElement("div");

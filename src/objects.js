@@ -1,6 +1,6 @@
 import { isAfter, isBefore } from 'date-fns';
 import { format, isToday, parse } from "date-fns";
-export { ToDo, Project, Aufgaben, projects};
+export { ToDo, Project, projects, saveProjectsToStorage};
 
 //Array for project Objects
 const projects = [];
@@ -68,12 +68,63 @@ class Project {
             this.selected=false;
         }
     }
+    toJSON() {
+        return {
+            name: this.name,
+            toDos: this.toDos.map(todo => ({
+                title: todo.title,
+                description: todo.description,
+                dueDate: todo.dueDate,
+                priority: todo.priority,
+                notes: todo.notes,
+                checklist: todo.checklist
+            })), // Speichert alle ToDos als flache Objekte
+            selected: this.selected
+        };
+    }
+
+    static fromJSON(json) {
+        const project = new Project(json.name);
+        project.toDos = json.toDos.map(todo => {
+            const dueDateParsed = parse(todo.dueDate, "dd-MM-yyyy", new Date());
+            return new ToDo(todo.title, todo.description, dueDateParsed, todo.priority, todo.notes);
+        });
+        project.selected = json.selected;
+        return project;
+    }
 }
 
-//Default Project//
-const Aufgaben = new Project("Survival");
-projects.push(Aufgaben);
-Aufgaben.toggleSelected();
-Aufgaben.addToDo("Drink 8 glasses of water", "for preventing dehydration", "12.30.2024", "high", "Otherwise I'll get headaches");
-Aufgaben.addToDo("Exercise", "2 hours of climbing!", "01.04.2025", "medium", "Need to register me first at the urban apes club");
-Aufgaben.addToDo("Read a chapter of a book", "Moby Dick needs to get finished", "01.22.2025", "low", "I really need to get this done");
+// Initialisiere Standardprojekt nur, wenn localStorage leer ist
+function initializeDefaultProject() {
+    const storageData = JSON.parse(localStorage.getItem("projects"));
+    if (!storageData || storageData.length === 0) {
+        const Aufgaben = new Project("Survival");
+        projects.push(Aufgaben);
+        Aufgaben.toggleSelected();
+        Aufgaben.addToDo("Drink 8 glasses of water", "for preventing dehydration", "12.30.2024", "high", "Otherwise I'll get headaches");
+        Aufgaben.addToDo("Exercise", "2 hours of climbing!", "01.04.2025", "medium", "Need to register me first at the urban apes club");
+        Aufgaben.addToDo("Read a chapter of a book", "Moby Dick needs to get finished", "01.22.2025", "low", "I really need to get this done");
+        saveProjectsToStorage();
+    } else {
+        getDatafromStorage();
+    }
+}
+initializeDefaultProject();
+
+//get Projects from storage //
+function getDatafromStorage() {
+
+    const storageData = JSON.parse(localStorage.getItem("projects"));
+    if (storageData!=null) {
+        for (let i=0; i < storageData.length; i++) {
+            const getClass = Project.fromJSON(storageData[i]);
+            projects.push(getClass);
+        }
+    }
+};
+
+//save Projects to Storage//
+function saveProjectsToStorage() {
+    const storageProjects = projects.map(project => project.toJSON()); // Alle Projekte, einschließlich ihrer toDos
+    localStorage.setItem("projects", JSON.stringify(storageProjects));
+}

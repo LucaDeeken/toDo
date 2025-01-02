@@ -25,6 +25,13 @@ module.exports = {
         use: ["style-loader", "css-loader"],
       },
       {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext][query]', // Schriftarten in den Ordner 'fonts' ausgeben
+        },
+      },
+      {
         test: /\.svg$/,
         use: 'file-loader', // oder 'url-loader' für kleine SVGs
       },

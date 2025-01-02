@@ -1,10 +1,10 @@
 import "./styles.css";
-import { ToDo, Project, Aufgaben, projects } from "./objects.js";
+import { ToDo, Project, projects, saveProjectsToStorage } from "./objects.js";
 import { addContainer, generateAllCards, sortByToday, sortByWeek, addProject } from "./populateDom";
 import info from './images/Info.png';
 import deleteButton from './images/delete.png';
 
-export {cardContent, cardArea, content, Aufgaben}
+export {cardContent, cardArea, content, saveProjectsToStorage}
 
 //GET DOM ELEMENTS
     const prioField = document.getElementById("prio");
@@ -17,6 +17,7 @@ export {cardContent, cardArea, content, Aufgaben}
     const newProject = document.getElementById("newProject");
     const createProject = document.getElementById("createProject");
     const defaultProject = document.getElementById("defaultProject");
+    const deleteProjBut = document.getElementById("deleteProjBut");
     //get Input-Fields (AddToDo)
     const favDialog = document.getElementById("dialog");
     const confirmBtn = favDialog.querySelector("#confirmBtn");
@@ -86,6 +87,7 @@ confirmBtn.addEventListener("click", (event) => {
         return;
     };
     selectedProject.addToDo(titleInput.value, descriptionInput.value, dateInput.value, prioInput.value, notesnInput.value);
+    saveProjectsToStorage();
     cardArea.innerHTML = "";
     favDialog.querySelector("form").reset();
     generateAllCards();
@@ -102,61 +104,82 @@ favDialog.close();
 cancelEdit.addEventListener("click", () => {
     editDialog.close();
 })
+
 //cancelNewProjectWindow
 cancelProject.addEventListener("click", () => {
 projDialog.close();
 })
-//add new Projects to Array
 
+//add new Projects to Array
 addProject.addEventListener("click", () => {
     createProject.showModal();
 })
 
 confirmBtnProject.addEventListener("click", (event) => {
-if(!projNameInput.value) {
-    alert("Enter the title of the project!");
-    return;
-}
-const newProjectTitle = new Project(projNameInput.value);
-projects.push(newProjectTitle);
-const newProjectContainer = document.createElement("div");
-newProjectContainer.id="defaultProject";
-newProjectContainer.classList.add("toggleProjClicked");
-newProjectContainer.textContent = projNameInput.value;
-newProject.parentNode.insertBefore(newProjectContainer, newProject);
-const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
-newProjectContainer.addEventListener("click", (event) => {
-        for(let j=0;j<toggleSidebarProjElements.length;j++) {
-            toggleSidebarProjElements[j].classList.remove("active");
-            event.target.classList.add("active");
-        }
-        const toggleProjectsOff = projects.find(project => project.selected === true);
-        toggleProjectsOff.toggleSelected();
-        newProjectTitle.toggleSelected();
-        cardArea.innerHTML = "";
-        const selectedProject = projects.find(project => project.selected === true);
-        if(selectedProject.toDos.length!=0) {
-            generateAllCards();
-        } else {
-            addContainer();
-        }
-    })
-})
-
-
-// For Sidebar default Project to pop up
-defaultProject.addEventListener("click", () => {
-    const toggleProjectsOff = projects.find(project => project.selected === true);
-    toggleProjectsOff.toggleSelected();
-    Aufgaben.toggleSelected();
-    cardArea.innerHTML = "";
-    const selectedProject = projects.find(project => project.selected === true);
-    if(selectedProject.toDos.length!=0) {
-        generateAllCards();
-    } else {
-        addContainer();
+    if(!projNameInput.value) {
+        alert("Enter the title of the project!");
+        return;
     }
+    const newProjectTitle = new Project(projNameInput.value);
+    projects.push(newProjectTitle);
+    const storageProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    localStorage.removeItem("projects");
+    storageProjects.push(newProjectTitle.toJSON());
+    localStorage.setItem("projects", JSON.stringify(storageProjects));
+    const newProjectContainer = document.createElement("div");
+    newProjectContainer.id="defaultProject";
+    newProjectContainer.classList.add("toggleProjClicked");
+    newProjectContainer.textContent = projNameInput.value;
+    newProject.parentNode.insertBefore(newProjectContainer, newProject);
+    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
+    newProjectContainer.addEventListener("click", (event) => {
+            for(let j=0;j<toggleSidebarProjElements.length;j++) {
+                toggleSidebarProjElements[j].classList.remove("active");
+                event.target.classList.add("active");
+            }
+            const toggleProjectsOff = projects.find(project => project.selected === true);
+            toggleProjectsOff.toggleSelected();
+            newProjectTitle.toggleSelected();
+            cardArea.innerHTML = "";
+            const selectedProject = projects.find(project => project.selected === true);
+            if(selectedProject.toDos.length!=0) {
+                generateAllCards();
+            } else {
+                addContainer();
+            }
+        })
 })
+
+//build project Divs//
+function buildProjectDivs() {
+
+    for (let i =0; i < projects.length; i++) {
+    const newProjectContainer = document.createElement("div");
+    newProjectContainer.id="defaultProject";
+    newProjectContainer.classList.add("toggleProjClicked");
+    newProjectContainer.textContent = projects[i].name;
+    newProject.parentNode.insertBefore(newProjectContainer, newProject);
+    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
+    newProjectContainer.addEventListener("click", (event) => {
+            for(let j=0;j<toggleSidebarProjElements.length;j++) {
+                toggleSidebarProjElements[j].classList.remove("active");
+                event.target.classList.add("active");
+            }
+            const toggleProjectsOff = projects.find(project => project.selected === true);
+            toggleProjectsOff.toggleSelected();
+            const chosenProj = projects[i];
+            chosenProj.toggleSelected();
+            cardArea.innerHTML = "";
+            const selectedProject = projects.find(project => project.selected === true);
+            if(selectedProject.toDos.length!=0) {
+                generateAllCards();
+            } else {
+                addContainer();
+            }
+        })
+    }
+} 
+buildProjectDivs();
 
 // toggle clicked dateElements on sideBar
 const toggleSidebarElements = document.getElementsByClassName("toggleClicked");
@@ -179,12 +202,19 @@ toggleSidebarProjElements.addEventListener("click", (event) => {
         }
     });
 
-// edit toDo on editDialog
+    //delete Project//
 
-const editButton = editDialog.querySelector("#editDialogButton");
+    deleteProjBut.addEventListener("click", () => {
+        const projectToDelete = projects.find(project => project.selected === true);
+        const indexProjectToDelete =projects.indexOf(projectToDelete);
+        projects.splice(indexProjectToDelete, 1);
+        console.log(projects);
+        projects[0].toggleSelected();
+        console.log(projects);
+        saveProjectsToStorage();
+        generateAllCards();
 
-editButton.addEventListener("click", () => {
-    console.log("hi bro");
-})
 
+    })
 
+    console.log(projects);
