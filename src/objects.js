@@ -1,4 +1,3 @@
-import { isAfter, isBefore } from 'date-fns';
 import { format, isToday, parse } from "date-fns";
 export { ToDo, Project, projects, saveProjectsToStorage};
 
@@ -82,7 +81,6 @@ class Project {
             selected: this.selected
         };
     }
-
     static fromJSON(json) {
         const project = new Project(json.name);
         project.toDos = json.toDos.map(todo => {
@@ -101,8 +99,8 @@ function initializeDefaultProject() {
         const Aufgaben = new Project("Survival");
         projects.push(Aufgaben);
         Aufgaben.toggleSelected();
-        Aufgaben.addToDo("Drink 8 glasses of water", "for preventing dehydration", "12.30.2024", "high", "Otherwise I'll get headaches");
-        Aufgaben.addToDo("Exercise", "2 hours of climbing!", "01.04.2025", "medium", "Need to register me first at the urban apes club");
+        Aufgaben.addToDo("Drink 8 glasses of water", "for preventing dehydration", "01.03.2025", "high", "Otherwise I'll get headaches");
+        Aufgaben.addToDo("Exercise", "2 hours of climbing!", "01.06.2025", "medium", "Need to register me first at the urban apes club");
         Aufgaben.addToDo("Read a chapter of a book", "Moby Dick needs to get finished", "01.22.2025", "low", "I really need to get this done");
         saveProjectsToStorage();
     } else {
@@ -113,7 +111,6 @@ initializeDefaultProject();
 
 //get Projects from storage //
 function getDatafromStorage() {
-
     const storageData = JSON.parse(localStorage.getItem("projects"));
     if (storageData!=null) {
         for (let i=0; i < storageData.length; i++) {

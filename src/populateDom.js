@@ -1,4 +1,4 @@
-import { Project, projects, ToDo } from "./objects.js";
+import { projects } from "./objects.js";
 import { cardContent, cardArea, content, saveProjectsToStorage } from "./index.js";
 import { isToday, parse, isWithinInterval, addDays } from "date-fns";
 import plusIMG from "./images/plus.png";
@@ -11,7 +11,7 @@ export { generateAllCards, sortByToday, sortByWeek, addContainer, addProject };
 
 //generating Cards
 
-function generateCard(i, j, h) {
+function generateCard(i, j) {
     
     const selectedProject = projects.find(project => project.selected === true);
     const newDiv = document.createElement("div");
@@ -37,7 +37,6 @@ function generateCard(i, j, h) {
                 j++
         }
         if (!selectedProject.toDos[i]) {
-            console.error(`No ToDo found at index ${i}`);
             return;
         }
 
@@ -83,7 +82,6 @@ function generateCard(i, j, h) {
         let h=0;
         const inputEditFields = editDialog.getElementsByClassName("editInputFields");
         for(let key in toDoKeys) {    
-            console.log(h);
             if (h===2) {
                 let dateString = toDoKeys[key];
                 let [day, month, year] = dateString.split("-");
@@ -91,13 +89,10 @@ function generateCard(i, j, h) {
                 const editDate = new Date(formattedDate);
                 inputEditFields[h].value= editDate.toISOString().split("T")[0];
             } else if (h===3) {
-                console.log(toDoKeys[key]);
                 switch (toDoKeys[key]) {
                     case "high":
                         const checkedPrioHigh = editDialog.querySelector("#prioEditHigh");
-                        console.log(checkedPrioHigh);
                         checkedPrioHigh.checked = true;
-                        console.log("high");
                         break;
                     case "medium":
                         const checkedPrioMedium = editDialog.querySelector("#prioEditMedium");
@@ -145,33 +140,26 @@ function generateCard(i, j, h) {
             saveProjectsToStorage();
             editDialog.close();
         });
-
-              
-
-
     })        
     });
-
     return j;
 }
 
 //generate add container
 function addContainer() {
-
-const addDiv = document.createElement("div");
-addDiv.id = "addDiv";
-cardArea.appendChild(addDiv);
-const plusBtn = document.createElement('img');
-plusBtn.src = plusIMG;
-plusBtn.id = "plus";
-addDiv.appendChild(plusBtn);
-addDiv.addEventListener("click", () => {
-    dialog.showModal();
-})
+    const addDiv = document.createElement("div");
+    addDiv.id = "addDiv";
+    cardArea.appendChild(addDiv);
+    const plusBtn = document.createElement('img');
+    plusBtn.src = plusIMG;
+    plusBtn.id = "plus";
+    addDiv.appendChild(plusBtn);
+    addDiv.addEventListener("click", () => {
+        dialog.showModal();
+    })
 }
 
 // generate add Projects Icon
-
 const addProject = document.createElement("img");
 addProject.id= "plusProject";
 const newContainer = document.getElementById("newProject");
@@ -186,8 +174,6 @@ function generateAllCards() {
     for(let i=0; i<selectedProject.toDos.length;i++) {
         j=generateCard(i, j);
     };
-    
-        // add "add"-Container at the last spot
     addContainer();
 }
 
@@ -197,7 +183,6 @@ function sortByToday() {
     let j=0;
     const selectedProject = projects.find(project => project.selected === true);    
     for (let i=0; i<selectedProject.toDos.length;i++) {
-
         if ((isToday(parse(selectedProject.toDos[i].dueDate, 'dd-MM-yyyy', new Date()))) === true) {
             j=generateCard(i, j);
         }
@@ -220,6 +205,3 @@ function sortByWeek() {
     }
     addContainer();
 }
-
-//check for chosen project
-const selectedProject = projects.find(project => project.selected === true);

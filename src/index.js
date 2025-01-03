@@ -156,6 +156,9 @@ function buildProjectDivs() {
     for (let i =0; i < projects.length; i++) {
     const newProjectContainer = document.createElement("div");
     newProjectContainer.id="defaultProject";
+    if (i === 0) {
+        newProjectContainer.classList.add("active");
+    }
     newProjectContainer.classList.add("toggleProjClicked");
     newProjectContainer.textContent = projects[i].name;
     newProject.parentNode.insertBefore(newProjectContainer, newProject);
@@ -192,29 +195,31 @@ for (let i=0; i<toggleSidebarElements.length;i++) {
     });
 }
 
-// toggle clicked projectElements on sideBar
-const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked")[0];
-toggleSidebarProjElements.addEventListener("click", (event) => {
-    const toggleSidebarProjElements = document.getElementsByClassName("toggleProjClicked");
-        for(let j=0;j<toggleSidebarProjElements.length;j++) {
-            toggleSidebarProjElements[j].classList.remove("active");
-            event.target.classList.add("active");
-        }
-    });
-
     //delete Project//
-
     deleteProjBut.addEventListener("click", () => {
         const projectToDelete = projects.find(project => project.selected === true);
         const indexProjectToDelete =projects.indexOf(projectToDelete);
-        projects.splice(indexProjectToDelete, 1);
-        console.log(projects);
-        projects[0].toggleSelected();
-        console.log(projects);
-        saveProjectsToStorage();
-        generateAllCards();
+        if (projects.length > 1) {
+            const userConfirmed = confirm("Do you really want to delete this project?");
+            if (userConfirmed) {
+                projects.splice(indexProjectToDelete, 1);
+                projects[0].toggleSelected();
+                saveProjectsToStorage();
+                generateAllCards();
+                const divToDelete = document.querySelector(".active");
+                divToDelete.remove();
+                const changeActiveDiv = document.querySelector(".toggleProjClicked");
+                if (changeActiveDiv.length > 1) {
+                    changeActiveDiv[0].click();
+                    
+                } else {
+                    changeActiveDiv.click();
+                }
 
-
+            } else {
+                //cancel//
+            };
+        } else {
+            alert("There has to be atleast one project!");
+        }
     })
-
-    console.log(projects);
