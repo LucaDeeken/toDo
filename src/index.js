@@ -189,8 +189,8 @@ const toggleSidebarElements = document.getElementsByClassName("toggleClicked");
 for (let i=0; i<toggleSidebarElements.length;i++) {
     toggleSidebarElements[i].addEventListener("click", (event) => {
         for(let j=0;j<toggleSidebarElements.length;j++) {
-            toggleSidebarElements[j].classList.remove("active");
-            event.target.classList.add("active");
+            toggleSidebarElements[j].classList.remove("activeDate");
+            event.target.classList.add("activeDate");
         }
     });
 }

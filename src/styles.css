@@ -263,6 +263,9 @@ body {
     color: black;
 }
 
+.activeDate {
+    color: rgba(0, 0, 255, .4);
+}
 
 /* Card Content */
 
