@@ -9,5 +9,5 @@ A dynamic todo list app featuring:
 - Modular code separating app logic and DOM manipulation.
 - Built with JavaScript and bundled with Webpack.
 
-Build in December 2025.   
+Build in December 2024.   
 Live Demo: https://lucadeeken.github.io/toDo/
